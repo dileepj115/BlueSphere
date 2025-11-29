@@ -45,7 +45,7 @@ import { PortfolioItem } from '../types';
 // const accessToken = import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN;
 
 // PASTE YOUR ACTUAL KEYS HERE (as strings):
-const spaceId = "r1lm1tr03a9yn";
+const spaceId = "1lm1tr03a9yn";
 const accessToken = "u0vhBwZ_S0-TkjKCKnQcfZVRpg6pIMZJolUUZ8kztkQ";
 
 console.log("Testing Keys:", spaceId, accessToken); // Check console to see if they print
