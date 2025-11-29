@@ -61,7 +61,7 @@ export const getPortfolioItems = async (): Promise<PortfolioItem[]> => {
     
     // Map the data (same as before)
     const items = response.items.map((item: any) => {
-      const imageFile = item.fields.image?.fields?.file;
+      const imageFile = item.fields.photo?.fields?.file;
       return {
         id: item.sys.id,
         src: imageFile ? `https:${imageFile.url}` : '',
