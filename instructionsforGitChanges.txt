@@ -1,0 +1,11 @@
+// add chnages
+git add .
+
+1. Stage everything (including new files):
+git add .
+
+2. Try to commit:
+git commit -m "Fix Contentful integration"
+
+3. Make chnages
+git push
