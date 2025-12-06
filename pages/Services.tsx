@@ -55,7 +55,6 @@ const services: ServicePackage[] = [
     description: 'Professional imagery designed to elevate your personal brand. Essential for Canberra’s professionals, public servants, and actors.',
     features: [
       'LinkedIn & Corporate Profiles',
-      'Actor & Model Headshots',
       'Real Estate Agent Profiles',
       'Studio or On-Location',
       'Coaching on Posing & Expression'
