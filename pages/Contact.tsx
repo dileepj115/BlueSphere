@@ -110,7 +110,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-stone-900">Availability</p>
-                  <p className="text-stone-600 text-sm">Mon - Sat: 9am - 5pm</p>
+                  <p className="text-stone-600 text-sm">Sat - Sun: 9am - 5pm, Weekdays: Please request</p>
                 </div>
               </div>
             </div>
