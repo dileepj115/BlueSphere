@@ -31,7 +31,7 @@ const Home: React.FC = () => {
               View Portfolio
             </Link>
             <Link 
-              to="/contact" 
+              to="/services" 
               className="px-8 py-3 bg-blue-600/80 backdrop-blur-sm border border-transparent text-white font-bold rounded-full hover:bg-blue-600 transition duration-300"
             >
               Book a Session

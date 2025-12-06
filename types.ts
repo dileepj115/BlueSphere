@@ -2,6 +2,7 @@ export interface ServicePackage {
   id: string;
   title: string;
   price: string;
+  originalPrice?: string; // <--- Add this line (The ? means it is optional)
   duration: string;
   description: string;
   features: string[];
