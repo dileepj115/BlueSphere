@@ -9,3 +9,7 @@ git commit -m "Fix Contentful integration"
 
 3. Make chnages
 git push
+
+git add .
+git commit -m "Fix Content Type ID"
+git push

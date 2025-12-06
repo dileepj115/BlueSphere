@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { PortfolioItem } from '../types';
 import { getPortfolioItems } from '../services/contentfulService';
 
-const categories = ["All", "Portraits", "Events", "Graduation", "Nature"];
+const categories = ["All", "Portraits", "Events", "Headshots", "Commercial"];
 
 const Portfolio: React.FC = () => {
   const [filter, setFilter] = useState("All");
