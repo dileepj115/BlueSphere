@@ -26,7 +26,7 @@ const Navbar: React.FC = () => {
                 <Aperture className="h-8 w-8" />
               </div>
               <span className="font-sans text-xl font-bold tracking-tight text-stone-900">
-                BLUESPHERE
+                BLUE SPHERE
               </span>
             </Link>
           </div>

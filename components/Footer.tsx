@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-white">
               <Aperture className="h-6 w-6 text-blue-500" />
-              <h3 className="text-2xl font-bold tracking-tight">BLUESPHERE</h3>
+              <h3 className="text-2xl font-bold tracking-tight">BLUE SPHERE</h3>
             </div>
             <p className="text-sm text-stone-400 max-w-xs">
               Professional photography services in Canberra, Queanbeyan, and Regional NSW. 
@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
                 <MapPin className="h-4 w-4 text-blue-500" /> Canberra, ACT & Surrounds
               </li>
               <li className="flex items-center gap-2">
-                <Mail className="h-4 w-4 text-blue-500" /> hello@bluespherephoto.com.au
+                <Mail className="h-4 w-4 text-blue-500" /> bluespherephoto@gmail.com
               </li>
               <li className="flex gap-4 mt-4">
                 <a href="#" className="hover:text-blue-400 transition"><Instagram className="h-5 w-5" /></a>
