@@ -1,13 +1,26 @@
+// pages/Services.tsx
 import React from 'react';
-import { Check, Camera, Zap, User, Home } from 'lucide-react';
+import { Check, Camera, Zap, User, Home, Star } from 'lucide-react'; // Added Star icon
 import { ServicePackage } from '../types';
 import { Link } from 'react-router-dom';
+
+// ==========================================
+// 🔧 ADMIN: ADJUST PRICES HERE
+// ==========================================
+const PRICING = {
+  family: { current: '$110', old: '$250' },
+  events: { current: '$100/hr', old: '$200/hr' },
+  headshots: { current: '$90', old: '$180' },
+  commercial: { current: 'Custom Quote', old: null } // No old price for commercial
+};
+// ==========================================
 
 const services: ServicePackage[] = [
   {
     id: 'family',
     title: 'Family & Portrait Photography',
-    price: 'From $250',
+    price: PRICING.family.current,        // Uses config above
+    originalPrice: PRICING.family.old,    // Uses config above
     duration: '1 - 1.5 Hours',
     description: 'Authentic moments captured in the comfort of your home or at iconic Canberra locations like the Arboretum or Lake Burley Griffin.',
     features: [
@@ -21,7 +34,8 @@ const services: ServicePackage[] = [
   {
     id: 'events',
     title: 'Event & Wedding Photography',
-    price: '$200/hr',
+    price: PRICING.events.current,
+    originalPrice: PRICING.events.old,
     duration: 'Min 2 Hours',
     description: 'Comprehensive coverage for life’s big celebrations. We blend into the background to capture the action as it happens.',
     features: [
@@ -35,7 +49,8 @@ const services: ServicePackage[] = [
   {
     id: 'headshots',
     title: 'Headshot & Personal Branding',
-    price: '$180',
+    price: PRICING.headshots.current,
+    originalPrice: PRICING.headshots.old,
     duration: '45 Mins',
     description: 'Professional imagery designed to elevate your personal brand. Essential for Canberra’s professionals, public servants, and actors.',
     features: [
@@ -50,7 +65,8 @@ const services: ServicePackage[] = [
   {
     id: 'commercial',
     title: 'Commercial & Property',
-    price: 'Custom Quote',
+    price: PRICING.commercial.current,
+    // originalPrice: null, // Commercial usually doesn't have a sale price
     duration: 'Project Based',
     description: 'High-impact visuals for your business. From e-commerce products to architectural real estate photography.',
     features: [
@@ -82,19 +98,44 @@ const Services: React.FC = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8 -mt-10">
+        
+        {/* ⭐ INTRODUCTORY OFFER BANNER ⭐ */}
+        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-8 flex items-center justify-center gap-2 text-yellow-800 shadow-sm animate-fade-in-up">
+            <Star className="h-5 w-5 fill-yellow-500 text-yellow-600" />
+            <span className="font-medium text-sm md:text-base">
+                <strong>Limited Time Offer:</strong> Introductory prices are currently active for the next 10 bookings!
+            </span>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {services.map((service) => (
             <div key={service.id} className="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden flex flex-col md:flex-row hover:shadow-xl transition-all duration-300 group">
               <div className="md:w-2/5 relative overflow-hidden h-64 md:h-auto">
                 <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"/>
                 <div className="absolute inset-0 bg-blue-900/10 group-hover:bg-transparent transition-colors"></div>
+                
+                {/* Sale Badge on Image */}
+                {service.originalPrice && (
+                    <div className="absolute top-4 left-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                        Limited Offer
+                    </div>
+                )}
               </div>
               <div className="p-8 md:w-3/5 flex flex-col">
                 <div className="mb-4">
                   <h3 className="text-2xl font-bold text-stone-900 mb-1">{service.title}</h3>
-                  <div className="flex items-center gap-2 text-blue-600 font-medium">
-                    <span>{service.price}</span>
-                    <span className="text-stone-300">|</span>
+                  <div className="flex flex-col gap-1">
+                    <div className="flex items-baseline gap-3">
+                        {/* Logic to show old price with strikethrough */}
+                        {service.originalPrice && (
+                            <span className="text-stone-400 line-through text-sm font-medium">
+                                {service.originalPrice}
+                            </span>
+                        )}
+                        <span className="text-blue-600 font-bold text-xl">
+                            {service.price}
+                        </span>
+                    </div>
                     <span className="text-sm text-stone-500">{service.duration}</span>
                   </div>
                 </div>
@@ -135,7 +176,7 @@ const Services: React.FC = () => {
                     <h3 className="font-bold text-stone-900">Personal Branding & Headshots</h3>
                 </div>
                 <p className="text-sm text-stone-600">
-                    We understand the specific needs of Canberra's professionals. Whether you are a public servant, real estate agent, or actor, 
+                    We understand the specific needs of Canberra's professionals. Whether you are a public servant, real estate agent, 
                     we provide "LinkedIn photos", "corporate portraits", and "business branding" that stand out.
                 </p>
             </div>
