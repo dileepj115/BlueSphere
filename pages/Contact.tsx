@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Mail, Phone, Calendar, Send, MapPin } from 'lucide-react';
+// 1. Import EmailJS
+import emailjs from '@emailjs/browser';
 
 const Contact: React.FC = () => {
   const { search } = useLocation();
@@ -16,7 +18,7 @@ const Contact: React.FC = () => {
     message: ''
   });
   
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   useEffect(() => {
     if(initialService) {
@@ -28,14 +30,34 @@ const Contact: React.FC = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('submitting');
-    // Simulate API call
-    setTimeout(() => {
+
+    // 2. Get keys from environment
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    // 3. Create the parameters object (Must match {{variables}} in your EmailJS template)
+    const templateParams = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        service: formData.serviceInterest,
+        date: formData.date,
+        message: formData.message
+    };
+
+    try {
+      // 4. Send the email
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
       setStatus('success');
-      console.log("Form Submitted", formData);
-    }, 1500);
+      setFormData({ name: '', email: '', phone: '', serviceInterest: '', date: '', message: '' }); // Clear form
+    } catch (error) {
+      console.error("Email failed to send:", error);
+      setStatus('error');
+    }
   };
 
   return (
@@ -61,7 +83,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-stone-900">Phone</p>
-                  <p className="text-stone-600 text-sm">+61 400 123 456</p>
+                  <p className="text-stone-600 text-sm">+61 459190709</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -70,7 +92,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-stone-900">Email</p>
-                  <p className="text-stone-600 text-sm break-all">hello@bluespherephoto.com.au</p>
+                  <p className="text-stone-600 text-sm break-all">bluespherephoto@gmail.com</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -109,6 +131,15 @@ const Contact: React.FC = () => {
                 >
                     Send another message
                 </button>
+              </div>
+            ) : status === 'error' ? (
+              <div className="h-full flex flex-col items-center justify-center text-center py-12">
+                 <div className="bg-red-100 p-4 rounded-full mb-4">
+                   <Mail className="h-8 w-8 text-red-600" />
+                 </div>
+                 <h3 className="text-xl font-bold text-stone-900 mb-2">Something went wrong.</h3>
+                 <p className="text-stone-600 mb-4">We couldn't send your message. Please verify your internet connection or email us directly.</p>
+                 <button onClick={() => setStatus('idle')} className="text-blue-600 hover:underline">Try Again</button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
