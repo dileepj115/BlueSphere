@@ -1,10 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Star } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 
 const Home: React.FC = () => {
   return (
     <div className="flex flex-col">
+      <Helmet>
+        <title>BlueSphere Photography | Portrait & Wedding Photographer Canberra</title>
+        <meta name="description" content="Professional photographer in Canberra, ACT. Specializing in family portraits, weddings, corporate headshots, and events. Book your local session today." />
+        <link rel="canonical" href="https://bluespherephoto.com/" />
+      </Helmet>
       {/* Hero Section */}
       <section className="relative h-[85vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">

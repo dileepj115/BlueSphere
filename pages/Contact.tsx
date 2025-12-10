@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { Mail, Phone, Calendar, Send, MapPin } from 'lucide-react';
 // 1. Import EmailJS
 import emailjs from '@emailjs/browser';
+import { Helmet } from 'react-helmet-async';
 
 const Contact: React.FC = () => {
   const { search } = useLocation();
@@ -62,6 +63,11 @@ const Contact: React.FC = () => {
 
   return (
     <div className="bg-stone-50 min-h-screen py-16">
+      <Helmet>
+        <title>Book a Session | Contact BlueSphere Photography</title>
+        <meta name="description" content="Ready to book? Contact us for family shoots, weddings, or headshots in Canberra. Fast response times and flexible booking availability." />
+        <link rel="canonical" href="https://bluespherephoto.com/contact" />
+      </Helmet>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center mb-12">

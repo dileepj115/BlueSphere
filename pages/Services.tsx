@@ -3,6 +3,7 @@ import React from 'react';
 import { Check, Camera, Zap, User, Home, Star } from 'lucide-react'; // Added Star icon
 import { ServicePackage } from '../types';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 // ==========================================
 // 🔧 ADMIN: ADJUST PRICES HERE
@@ -82,6 +83,11 @@ const services: ServicePackage[] = [
 const Services: React.FC = () => {
   return (
     <div className="bg-stone-50 min-h-screen">
+      <Helmet>
+        <title>Photography Prices & Packages | Canberra & Queanbeyan</title>
+        <meta name="description" content="Affordable photography rates for 2024. Family portraits from $110, Event coverage from $100/hr. Transparent pricing for Canberra families and businesses." />
+        <link rel="canonical" href="https://bluespherephoto.com/services" />
+      </Helmet>
       <div className="bg-stone-900 py-20 relative overflow-hidden">
         {/* Abstract Blue Orb Background */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600 rounded-full mix-blend-overlay filter blur-3xl opacity-20 transform translate-x-1/2 -translate-y-1/2"></div>
