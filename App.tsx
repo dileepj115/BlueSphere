@@ -5,7 +5,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Services from './pages/Services';
-import Portfolio from './pages/Portfolio_old1';
+import Portfolio from './pages/Portfolio';
 import WallArt from './pages/WallArt';
 import Contact from './pages/Contact';
 
