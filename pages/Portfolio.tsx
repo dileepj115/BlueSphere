@@ -1,12 +1,9 @@
-// pages/Portfolio.tsx
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { PortfolioItem } from '../types';
 import { getPortfolioItems } from '../services/contentfulService';
 
-const categories = ["All", "Portraits", "Events", "Headshots", "Commercial"];
-
 const Portfolio: React.FC = () => {
-  const [filter, setFilter] = useState("All");
   const [photos, setPhotos] = useState<PortfolioItem[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -19,67 +16,47 @@ const Portfolio: React.FC = () => {
     fetchData();
   }, []);
 
-  const filteredPhotos = filter === "All" 
-    ? photos 
-    : photos.filter(p => p.category === filter);
-
   return (
-    <div className="min-h-screen bg-stone-50 pb-20">
-      <div className="bg-white border-b border-stone-200">
-        <div className="max-w-7xl mx-auto px-4 py-12 text-center">
-          <h1 className="text-4xl font-serif font-bold text-stone-900 mb-4">Portfolio</h1>
-          <p className="text-stone-500 max-w-2xl mx-auto mb-8">
-            A collection of stories told through light and shadow.
-          </p>
-          
-          <div className="flex flex-wrap justify-center gap-2">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setFilter(cat)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                  filter === cat 
-                    ? "bg-stone-900 text-white shadow-md" 
-                    : "bg-stone-100 text-stone-600 hover:bg-stone-200"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </div>
+    <div className="min-h-screen bg-white pb-20">
+      <Helmet>
+        <title>Portfolio | BlueSphere Photography Canberra</title>
+        <meta name="description" content="A visual collection of our latest photography work in Canberra. Weddings, Portraits, and Events." />
+        <link rel="canonical" href="https://bluespherephoto.com/portfolio" />
+      </Helmet>
+
+      {/* Header - Minimalist */}
+      <div className="max-w-7xl mx-auto px-4 pt-16 pb-12 text-center md:text-left">
+        <h1 className="text-3xl md:text-5xl font-serif font-bold text-stone-900 tracking-tight">
+          Selected Works
+        </h1>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6">
         {loading ? (
-          <div className="flex justify-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-stone-900"></div>
+          <div className="flex justify-center py-40">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-stone-900"></div>
           </div>
         ) : (
-          <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-            {filteredPhotos.map((photo) => (
-              <div key={photo.id} className="break-inside-avoid group relative overflow-hidden rounded-lg shadow-sm">
+          /* Masonry Layout - Large gaps, clean presentation */
+          <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+            {photos.map((photo) => (
+              <div key={photo.id} className="break-inside-avoid mb-8">
                 <img 
                   src={photo.src} 
                   alt={photo.alt} 
-                  className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-auto object-cover hover:opacity-95 transition-opacity duration-300"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
-                <div className="absolute bottom-0 left-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="bg-white/90 text-stone-900 text-xs font-bold px-2 py-1 rounded backdrop-blur-sm uppercase tracking-wide">
-                    {photo.category}
-                  </span>
-                </div>
+                {/* Optional: Minimal caption below image (Mica style), remove if you want 100% pure image */}
+                {/* <p className="mt-2 text-xs text-stone-400 uppercase tracking-widest">{photo.alt}</p> */}
               </div>
             ))}
           </div>
         )}
         
-        {!loading && filteredPhotos.length === 0 && (
+        {!loading && photos.length === 0 && (
           <div className="text-center py-20 text-stone-500">
-            No photos found in this category.
+            No images found. Please upload content to Contentful.
           </div>
         )}
       </div>

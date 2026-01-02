@@ -13,3 +13,11 @@ git push
 git add .
 git commit -m "Fix Content Type ID"
 git push
+
+git add .
+git commit -m "add emailjs"
+git push
+
+git add .
+git commit -m "Fix Contentful integration"
+git push
